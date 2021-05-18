@@ -14,20 +14,31 @@
   </nav>
   <div class="container">
     <hr class="text-white">
-    <div class="row">
-      <div class="col-4">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Rahul Shambharkar</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Full Stack Developer</h6>
-            <span class="badge bg-success">GBS</span>
-            <hr>
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-danger">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Department</th>
+          <th scope="col" colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees;let no = index">
+          <th scope="row">{{no + 1}}</th>
+          <td>{{emp.name}}</td>
+          <td>{{emp.position}}</td>
+          <td><span class="badge" [ngClass]="{
+            'bg-success' : emp.dept == 'GBS',
+            'bg-danger' : emp.dept == 'Development',
+            'bg-warning' : emp.dept == 'FS'
+          }">{{emp.dept}}</span></td>
+          <td><button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button></td>
+          <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteEmployee(emp)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
